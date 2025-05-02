@@ -7,7 +7,13 @@ import os
 import traceback
 
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  
+    allow_credentials=True,
+    allow_methods=["*"],                     
+    allow_headers=["*"],                   
+)
 MODEL_PATH = 'new_model.pkl'
 if not os.path.exists(MODEL_PATH):
     raise RuntimeError(f"Model file missing. Train first: {os.path.abspath(MODEL_PATH)}")
