@@ -7,7 +7,7 @@ import os
 
 app = FastAPI()
 
-MODEL_PATH = '/Users/akhileshkumar/Desktop/sprinthacks/new_model.pkl'
+MODEL_PATH = 'new_model.pkl'
 if not os.path.exists(MODEL_PATH):
     raise RuntimeError(f"Model file missing. Train first: {os.path.abspath(MODEL_PATH)}")
 try:
