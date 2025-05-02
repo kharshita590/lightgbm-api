@@ -6,7 +6,7 @@ import pandas as pd
 import os
 from flask_cors import CORS
 import traceback
-app = Flask(__name__)
+app = FastAPI(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 app = FastAPI()
 
