@@ -4,10 +4,8 @@ import pickle
 from datetime import datetime, timedelta
 import pandas as pd
 import os
-from flask_cors import CORS
 import traceback
-app = FastAPI(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
 app = FastAPI()
 
 MODEL_PATH = 'new_model.pkl'
@@ -70,10 +68,9 @@ async def predict(request: PredictionRequest):
         predictor = CropPricePredictor(model, encoders)
         prediction = predictor.predict(request.model_dump())
         target_date = datetime.strptime(request.current_date, "%Y-%m-%d") + timedelta(days=9)
-        target_p = target_date.strftime("%Y-%m-%d")
         return {
             "predicted_price": f"₹{prediction}/kg",
-            "prediction_date": target_p.strftime("%B"),
+            "prediction_date": target_date.strftime("%B"),
             "currency": "INR"
         }
     except ValueError as e:
